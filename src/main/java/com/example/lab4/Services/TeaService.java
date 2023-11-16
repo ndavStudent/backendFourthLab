@@ -19,11 +19,11 @@ public class TeaService {
         return teaRepository.findAll();
     }
 
-    public Tea createTea(TeaDTO teaDTO) {
+    public void createTea(TeaDTO teaDTO) {
         Tea tea = new Tea();
         tea.setName(teaDTO.getName());
         tea.setPrice(teaDTO.getPrice());
-        return teaRepository.save(tea);
+        teaRepository.save(tea);
     }
 
     public String deleteTea(Long id) {

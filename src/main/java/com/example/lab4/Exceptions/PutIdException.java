@@ -1,7 +1,9 @@
 package com.example.lab4.Exceptions;
 
-public class PutIdException extends Exception{
-    public PutIdException(String message){
-        super(message);
+import org.springframework.http.HttpStatus;
+
+public class PutIdException extends TeaException{
+    public PutIdException(String code, String message){
+        super(HttpStatus.BAD_REQUEST, code, message);
     }
 }
