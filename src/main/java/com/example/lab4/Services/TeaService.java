@@ -27,6 +27,9 @@ public class TeaService {
     }
 
     public String deleteTea(Long id) {
+        if(!teaRepository.existsById(id)){
+            return "Not found";
+        }
         teaRepository.deleteById(id);
         return "Deleted";
     }
@@ -35,5 +38,8 @@ public class TeaService {
         tea.setName(teaDTO.getName());
         tea.setPrice(teaDTO.getPrice());
         return teaRepository.save(tea);
+    }
+    public boolean existsById(Long id) {
+        return teaRepository.existsById(id);
     }
 }
