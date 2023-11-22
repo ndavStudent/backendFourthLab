@@ -1,0 +1,1 @@
+INSERT INTO tea (name, price) VALUES ('Earl Gre', 222), ('through fire and flames',333);

@@ -1,11 +1,16 @@
 package com.example.lab4.Models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
+@Entity(name = "tea")
+@Builder
 @Data
-@Table(name = "tea")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Tea {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -15,8 +15,13 @@
     <description>lab4</description>
     <properties>
         <java.version>17</java.version>
+        <flyway.url>jdbc:postgresql://localhost:5431/tea</flyway.url>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
