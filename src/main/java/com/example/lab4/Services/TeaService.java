@@ -3,17 +3,16 @@ package com.example.lab4.Services;
 import com.example.lab4.DTO.TeaDTO;
 import com.example.lab4.Models.Tea;
 import com.example.lab4.Repositories.TeaRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TeaService {
     private final TeaRepository teaRepository;
 
-    public TeaService(TeaRepository teaRepository) {
-        this.teaRepository = teaRepository;
-    }
 
     public List<Tea> getTea() {
         return teaRepository.findAll();

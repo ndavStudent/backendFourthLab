@@ -3,10 +3,9 @@ package com.example.lab4.Controllers;
 import com.example.lab4.DTO.ResponseDTO;
 import com.example.lab4.DTO.StatusDTO;
 import com.example.lab4.DTO.TeaDTO;
-import com.example.lab4.Exceptions.EmptyResponseException;
-import com.example.lab4.Exceptions.PostTeaException;
-import com.example.lab4.Exceptions.PutIdException;
-import com.example.lab4.Exceptions.WrongTeaIdException;
+import com.example.lab4.Exceptions.*;
+import com.example.lab4.Models.Tea;
+import com.example.lab4.Repositories.TeaRepository;
 import com.example.lab4.Services.TeaService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -17,20 +16,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@TeaControllerExceptionHandler
 public class TeaController {
     private final ModelMapper modelMapper;
     private final TeaService teaService;
+    private final TeaRepository teaRepository;
 
-    @GetMapping("/tea")
-    public ResponseDTO getTea() throws EmptyResponseException {
-        List<TeaDTO> teaDTOList = teaService.getTea().stream()
-                .map(tea -> modelMapper.map(tea, TeaDTO.class))
-                .toList();
-        if (teaDTOList.isEmpty()) {
-            throw new EmptyResponseException("404", "Чай закончился");
-        }
+    @GetMapping("/tea/{id}")
+    public ResponseDTO getTea(@PathVariable Long id) throws EmptyResponseException {
+        Tea tea = teaRepository.findById(id).orElseThrow(()-> new EmptyResponseException(404, "Чая с таким id нет"));
+        TeaDTO teaDTO = modelMapper.map(tea, TeaDTO.class);
         ResponseDTO responseDTO = new ResponseDTO();
-        responseDTO.setData(teaDTOList);
+        responseDTO.setData(teaDTO);
         responseDTO.setStatus("Success");
         return responseDTO;
     }
