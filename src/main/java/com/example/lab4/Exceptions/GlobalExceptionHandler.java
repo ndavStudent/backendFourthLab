@@ -6,8 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
+@RestControllerAdvice(annotations = TeaControllerExceptionHandler.class)
 public class GlobalExceptionHandler {
     @ExceptionHandler(EmptyResponseException.class)
     public ErrorDTO emptyHandler(EmptyResponseException e) {
